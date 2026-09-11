@@ -1,0 +1,40 @@
+{
+  "name": "@delaluz/tokens",
+  "version": "0.0.0",
+  "description": "Multi-platform design tokens for De la Luz Labs.",
+  "author": "Eduardo de la Luz Nicolás",
+  "type": "module",
+  "license": "MIT",
+  "sideEffects": false,
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/types/index.js"
+    },
+    "./css": "./dist/css/tokens.css",
+    "./json": "./dist/json/tokens.json"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "clean": "node ./scripts/clean.mjs",
+    "tokens:validate": "node ./scripts/validate.mjs",
+    "build": "npm run clean && npm run tokens:validate && node ./scripts/build.mjs",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
+  },
+  "keywords": [],
+  "devDependencies": {
+    "style-dictionary": "5.5.3"
+  },
+  "engines": {
+    "node": ">=24 <25",
+    "npm": ">=11"
+  }
+}

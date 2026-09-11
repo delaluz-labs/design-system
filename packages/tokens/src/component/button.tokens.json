@@ -1,0 +1,43 @@
+{
+  "$schema": "https://www.designtokens.org/schemas/2025.10/format.json",
+
+  "component": {
+    "button": {
+      "background": {
+        "default": {
+          "$type": "color",
+          "$value": "{semantic.color.action.primary}"
+        },
+
+        "hover": {
+          "$type": "color",
+          "$value": "{semantic.color.action.primary-hover}"
+        }
+      },
+
+      "text": {
+        "default": {
+          "$type": "color",
+          "$value": "{semantic.color.text.inverse}"
+        }
+      },
+
+      "radius": {
+        "$type": "dimension",
+        "$value": "{radius.md}"
+      },
+
+      "padding": {
+        "inline": {
+          "$type": "dimension",
+          "$value": "{spacing.4}"
+        },
+
+        "block": {
+          "$type": "dimension",
+          "$value": "{spacing.2}"
+        }
+      }
+    }
+  }
+}

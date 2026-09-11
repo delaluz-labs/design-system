@@ -1,0 +1,41 @@
+{
+  "$schema": "https://www.designtokens.org/schemas/2025.10/format.json",
+
+  "semantic": {
+    "spacing": {
+      "inline": {
+        "xs": {
+          "$type": "dimension",
+          "$value": "{spacing.1}"
+        },
+
+        "sm": {
+          "$type": "dimension",
+          "$value": "{spacing.2}"
+        },
+
+        "md": {
+          "$type": "dimension",
+          "$value": "{spacing.4}"
+        }
+      },
+
+      "stack": {
+        "xs": {
+          "$type": "dimension",
+          "$value": "{spacing.1}"
+        },
+
+        "sm": {
+          "$type": "dimension",
+          "$value": "{spacing.2}"
+        },
+
+        "md": {
+          "$type": "dimension",
+          "$value": "{spacing.4}"
+        }
+      }
+    }
+  }
+}

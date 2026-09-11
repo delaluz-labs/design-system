@@ -1,0 +1,72 @@
+{
+  "$schema": "https://www.designtokens.org/schemas/2025.10/format.json",
+
+  "font": {
+    "family": {
+      "sans": {
+        "$type": "fontFamily",
+        "$value": [
+          "Nunito",
+          "Arial",
+          "sans-serif"
+        ]
+      },
+
+      "mono": {
+        "$type": "fontFamily",
+        "$value": [
+          "monospace"
+        ]
+      }
+    },
+
+    "weight": {
+      "regular": {
+        "$type": "fontWeight",
+        "$value": 400
+      },
+
+      "medium": {
+        "$type": "fontWeight",
+        "$value": 500
+      },
+
+      "bold": {
+        "$type": "fontWeight",
+        "$value": 700
+      }
+    },
+
+    "size": {
+      "$type": "dimension",
+
+      "sm": {
+        "$value": {
+          "value": 14,
+          "unit": "px"
+        }
+      },
+
+      "md": {
+        "$value": {
+          "value": 16,
+          "unit": "px"
+        }
+      },
+
+      "lg": {
+        "$value": {
+          "value": 18,
+          "unit": "px"
+        }
+      },
+
+      "xl": {
+        "$value": {
+          "value": 24,
+          "unit": "px"
+        }
+      }
+    }
+  }
+}
