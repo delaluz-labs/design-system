@@ -1,0 +1,50 @@
+{
+  "$schema": "https://www.designtokens.org/schemas/2025.10/format.json",
+
+  "semantic": {
+    "color": {
+      "background": {
+        "default": {
+          "$type": "color",
+          "$value": "{color.neutral.0}"
+        },
+
+        "inverse": {
+          "$type": "color",
+          "$value": "{color.neutral.1000}"
+        }
+      },
+
+      "text": {
+        "primary": {
+          "$type": "color",
+          "$value": "{color.neutral.1000}"
+        },
+
+        "inverse": {
+          "$type": "color",
+          "$value": "{color.neutral.0}"
+        }
+      },
+
+      "action": {
+        "primary": {
+          "$type": "color",
+          "$value": "{color.blue.500}"
+        },
+
+        "primary-hover": {
+          "$type": "color",
+          "$value": "{color.blue.600}"
+        }
+      },
+
+      "feedback": {
+        "error": {
+          "$type": "color",
+          "$value": "{color.red.500}"
+        }
+      }
+    }
+  }
+}

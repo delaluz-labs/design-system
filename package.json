@@ -1,0 +1,45 @@
+{
+  "name": "@delaluz/design-system",
+  "version": "0.0.0",
+  "description": "Tokens, themes and components.",
+  "author": "Eduardo de la Luz Nicolás",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "npm run build --workspaces --if-present",
+    "clean": "npm run clean --workspaces --if-present",
+    "lint": "eslint .",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present",
+    "validate": "npm run lint && npm run typecheck && npm run test && npm run build"
+  },
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "engines": {
+    "node": ">=24 <25",
+    "npm": ">=11"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/delaluz-labs/design-system.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/delaluz-labs/design-system/issues"
+  },
+  "homepage": "https://github.com/delaluz-labs/design-system#readme",
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "@vitest/coverage-v8": "5.0.0",
+    "eslint": "10.10.0",
+    "globals": "17.12.0",
+    "typescript": "7.0.2",
+    "vitest": "5.0.0"
+  },
+  "allowScripts": {
+    "fsevents@2.3.3": true
+  }
+}
