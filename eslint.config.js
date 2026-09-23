@@ -3,18 +3,14 @@ import globals from 'globals';
 
 export default [
   {
-    ignores: [
-      '**/node_modules/**',
-      '**/dist/**',
-      '**/coverage/**'
-    ]
+    ignores: ['**/node_modules/**', '**/dist/**', '**/coverage/**'],
   },
   js.configs.recommended,
   {
     languageOptions: {
       globals: {
         ...globals.browser, // Adds browser globals like console, window, etc.
-        ...globals.node,    // Optional: Adds Node.js globals like process
+        ...globals.node, // Optional: Adds Node.js globals like process
       },
     },
   },
@@ -22,10 +18,11 @@ export default [
     files: ['**/*.js', '**/*.mjs'],
     languageOptions: {
       ecmaVersion: 'latest',
-      sourceType: 'module'
+      sourceType: 'module',
     },
     rules: {
-      complexity: ['error', 10], 'no-console': ['warn', {allow: ['log', 'warn', 'error']}]
-    }
-  }
+      complexity: ['error', 10],
+      'no-console': ['warn', { allow: ['log', 'warn', 'error'] }],
+    },
+  },
 ];

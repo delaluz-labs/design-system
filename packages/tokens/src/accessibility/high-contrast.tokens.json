@@ -1,0 +1,21 @@
+{
+  "$schema": "https://www.designtokens.org/schemas/2025.10/format.json",
+
+  "semantic": {
+    "color": {
+      "border": {
+        "default": {
+          "$type": "color",
+          "$value": "{semantic.color.text.primary}"
+        }
+      },
+
+      "focus": {
+        "ring": {
+          "$type": "color",
+          "$value": "{brand.primary}"
+        }
+      }
+    }
+  }
+}

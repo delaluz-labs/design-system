@@ -4,6 +4,8 @@ node_modules/
 # Build
 dist/
 build/
+!packages/tokens/scripts/build/
+!packages/tokens/tests/build/
 coverage/
 
 # Cache

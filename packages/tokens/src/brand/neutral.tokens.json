@@ -1,0 +1,23 @@
+{
+  "$schema": "https://www.designtokens.org/schemas/2025.10/format.json",
+
+  "brand": {
+    "primary": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [0.247, 0.247, 0.275],
+        "hex": "#3f3f46"
+      }
+    },
+
+    "primary-hover": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [0.153, 0.153, 0.165],
+        "hex": "#27272a"
+      }
+    }
+  }
+}

@@ -35,3 +35,6 @@ jobs:
 
       - name: Validate
         run: npm run validate
+
+      - name: Tokens coverage
+        run: npm run test:coverage --workspace=@delaluz/tokens

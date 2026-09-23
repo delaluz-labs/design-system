@@ -23,7 +23,10 @@
   "scripts": {
     "clean": "node ./scripts/clean.mjs",
     "tokens:validate": "node ./scripts/validate.mjs",
-    "build": "npm run clean && npm run tokens:validate && node ./scripts/build.mjs",
+    "themes:validate": "node ./scripts/validate-themes.mjs",
+    "build:tokens": "node ./scripts/build.mjs",
+    "build": "npm run clean && npm run tokens:validate && npm run themes:validate && npm run build:tokens",
+    "build:determinism": "node ./scripts/build/validate-determinism.mjs",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
@@ -31,6 +34,7 @@
   },
   "keywords": [],
   "devDependencies": {
+    "@vitest/coverage-v8": "5.0.0",
     "style-dictionary": "5.5.3"
   },
   "engines": {
