@@ -3,6 +3,20 @@
 
   "semantic": {
     "color": {
+      "color": {
+        "action": {
+          "primary": {
+            "$type": "color",
+            "$value": "{brand.primary}"
+          },
+
+          "primary-hover": {
+            "$type": "color",
+            "$value": "{brand.primary-hover}"
+          }
+        }
+      },
+
       "background": {
         "default": {
           "$type": "color",

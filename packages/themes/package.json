@@ -1,0 +1,31 @@
+{
+  "name": "@delaluz/themes",
+  "version": "0.0.0",
+  "description": "Runtime-neutral theme engine for the De la Luz Design System.",
+  "author": "Eduardo de la Luz Nicolás",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "sideEffects": false,
+  "scripts": {
+    "clean": "node ./scripts/clean.mjs",
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
+  },
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": []
+}

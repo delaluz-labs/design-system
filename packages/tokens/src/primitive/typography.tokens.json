@@ -5,18 +5,12 @@
     "family": {
       "sans": {
         "$type": "fontFamily",
-        "$value": [
-          "Nunito",
-          "Arial",
-          "sans-serif"
-        ]
+        "$value": ["Nunito", "Arial", "sans-serif"]
       },
 
       "mono": {
         "$type": "fontFamily",
-        "$value": [
-          "monospace"
-        ]
+        "$value": ["monospace"]
       }
     },
 

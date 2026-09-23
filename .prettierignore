@@ -1,0 +1,8 @@
+node_modules
+dist
+coverage
+.nx
+.next
+storybook-static
+
+package-lock.json

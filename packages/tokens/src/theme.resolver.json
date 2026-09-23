@@ -1,0 +1,144 @@
+{
+  "$schema": "https://www.designtokens.org/schemas/2025.10/resolver.json",
+  "name": "De la Luz Design System",
+  "version": "2025.10",
+  "description": "Multi-platform design system theme resolver.",
+  "sets": {
+    "primitive": {
+      "sources": [
+        {
+          "$ref": "primitive/color.tokens.json"
+        },
+        {
+          "$ref": "primitive/spacing.tokens.json"
+        },
+        {
+          "$ref": "primitive/radius.tokens.json"
+        },
+        {
+          "$ref": "primitive/typography.tokens.json"
+        },
+        {
+          "$ref": "primitive/motion.tokens.json"
+        }
+      ]
+    },
+
+    "semantic": {
+      "sources": [
+        {
+          "$ref": "semantic/color.tokens.json"
+        },
+        {
+          "$ref": "semantic/spacing.tokens.json"
+        }
+      ]
+    },
+
+    "component": {
+      "sources": [
+        {
+          "$ref": "component/button.tokens.json"
+        }
+      ]
+    }
+  },
+
+  "modifiers": {
+    "brand": {
+      "description": "Visual brand identity.",
+
+      "contexts": {
+        "delaluz": [
+          {
+            "$ref": "brand/delaluz.tokens.json"
+          }
+        ],
+
+        "neutral": [
+          {
+            "$ref": "brand/neutral.tokens.json"
+          }
+        ]
+      },
+
+      "default": "delaluz"
+    },
+
+    "scheme": {
+      "description": "Application color scheme.",
+
+      "contexts": {
+        "light": [
+          {
+            "$ref": "scheme/light.tokens.json"
+          }
+        ],
+
+        "dark": [
+          {
+            "$ref": "scheme/dark.tokens.json"
+          }
+        ]
+      },
+
+      "default": "light"
+    },
+
+    "contrast": {
+      "description": "Contrast preference.",
+
+      "contexts": {
+        "standard": [],
+
+        "high": [
+          {
+            "$ref": "accessibility/high-contrast.tokens.json"
+          }
+        ]
+      },
+
+      "default": "standard"
+    },
+
+    "motion": {
+      "description": "Motion preference.",
+
+      "contexts": {
+        "standard": [],
+
+        "reduced": [
+          {
+            "$ref": "accessibility/reduced-motion.tokens.json"
+          }
+        ]
+      },
+
+      "default": "standard"
+    }
+  },
+
+  "resolutionOrder": [
+    {
+      "$ref": "#/sets/primitive"
+    },
+    {
+      "$ref": "#/sets/semantic"
+    },
+    {
+      "$ref": "#/sets/component"
+    },
+    {
+      "$ref": "#/modifiers/brand"
+    },
+    {
+      "$ref": "#/modifiers/scheme"
+    },
+    {
+      "$ref": "#/modifiers/contrast"
+    },
+    {
+      "$ref": "#/modifiers/motion"
+    }
+  ]
+}
