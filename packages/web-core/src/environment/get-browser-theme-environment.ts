@@ -1,11 +1,12 @@
 import type { ThemeEnvironment } from '@delaluz/themes';
-import type { MatchMedia } from '../media/match-media';
-import { THEME_MEDIA_QUERIES } from '../media/theme-media-queries';
+import type { ThemeMediaQueryLists } from '../media/theme-media-query-lists';
 
-export function getBrowserThemeEnvironment(matchMedia: MatchMedia): ThemeEnvironment {
+export function getBrowserThemeEnvironment(
+  mediaQueryLists: ThemeMediaQueryLists,
+): ThemeEnvironment {
   return {
-    scheme: matchMedia(THEME_MEDIA_QUERIES.darkScheme).matches ? 'dark' : 'light',
-    contrast: matchMedia(THEME_MEDIA_QUERIES.highContrast).matches ? 'high' : 'standard',
-    motion: matchMedia(THEME_MEDIA_QUERIES.reducedMotion).matches ? 'reduced' : 'standard',
+    scheme: mediaQueryLists.scheme.matches ? 'dark' : 'light',
+    contrast: mediaQueryLists.contrast.matches ? 'high' : 'standard',
+    motion: mediaQueryLists.motion.matches ? 'reduced' : 'standard',
   };
 }

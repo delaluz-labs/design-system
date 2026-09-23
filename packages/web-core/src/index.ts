@@ -4,3 +4,7 @@ export type { MatchMedia } from './media/match-media';
 export { THEME_MEDIA_QUERIES } from './media/theme-media-queries';
 export { applyTheme } from './theme/apply-theme';
 export { THEME_ATTRIBUTES } from './theme/theme-attributes';
+export { createThemeController } from './theme/create-theme-controller';
+export type { ThemeController } from './theme/theme-controller';
+export { createThemeMediaQueryLists } from './media/create-theme-media-query-lists';
+export type { ThemeMediaQueryLists } from './media/theme-media-query-lists';
