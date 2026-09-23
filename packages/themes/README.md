@@ -14,13 +14,19 @@ Themes are composed from independent dimensions:
 ## Example
 
 ```ts
-const theme = resolveTheme(
+import { resolveThemePreference } from '@delaluz/themes';
+
+const theme = resolveThemePreference(
   {
     brand: 'delaluz',
     scheme: 'system',
     contrast: 'system',
     motion: 'system',
   },
-  environment,
+  {
+    scheme: 'dark',
+    contrast: 'standard',
+    motion: 'reduced',
+  },
 );
 ```

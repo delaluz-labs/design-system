@@ -1,15 +1,10 @@
-export { DEFAULT_THEME_PREFERENCE } from './theme.defaults';
+export { DEFAULT_THEME_PREFERENCE } from './constants/default-theme-preference';
+export { resolveThemePreference } from './resolver/resolve-theme-preference';
 export { createThemeId } from './theme-id';
-export { resolveTheme } from './resolve-theme';
-export type {
-  ResolvedTheme,
-  ThemeBrand,
-  ThemeContrast,
-  ThemeContrastPreference,
-  ThemeEnvironment,
-  ThemeMotion,
-  ThemeMotionPreference,
-  ThemePreference,
-  ThemeScheme,
-  ThemeSchemePreference,
-} from './theme.types';
+export type { ResolvedTheme } from './types/resolved-theme';
+export type { ThemeBrand } from './types/theme-brand';
+export type { ThemeContrast, ThemeContrastPreference } from './types/theme-contrast';
+export type { ThemeEnvironment } from './types/theme-environment';
+export type { ThemeMotion, ThemeMotionPreference } from './types/theme-motion';
+export type { ThemePreference } from './types/theme-preference';
+export type { ThemeScheme, ThemeSchemePreference } from './types/theme-scheme';
