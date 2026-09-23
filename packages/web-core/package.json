@@ -1,0 +1,47 @@
+{
+  "name": "@delaluz/web-core",
+  "version": "0.0.0",
+  "description": "Shared web foundations of the De la Luz Design System.",
+  "author": "Eduardo de la Luz Nicolás",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "sideEffects": false,
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage"
+  },
+  "engines": {
+    "node": ">=24 <25",
+    "npm": ">=11"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/delaluz-labs/design-system.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/delaluz-labs/design-system/issues"
+  },
+  "homepage": "https://github.com/delaluz-labs/design-system#readme",
+  "dependencies": {
+    "@delaluz/themes": "0.0.0"
+  },
+  "devDependencies": {
+    "jsdom": "29.1.1"
+  }
+}
