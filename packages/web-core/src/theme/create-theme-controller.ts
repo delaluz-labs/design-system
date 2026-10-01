@@ -1,35 +1,33 @@
-import { resolveThemePreference, type ResolvedTheme, type ThemePreference } from '@delaluz/themes';
-
+import {
+  DEFAULT_THEME_PREFERENCE,
+  resolveThemePreference,
+  type ResolvedTheme,
+  type ThemePreference,
+  type ThemePreferenceStorage,
+  type ThemeEnvironment,
+} from '@delaluz/themes';
 import { getBrowserThemeEnvironment } from '../environment/get-browser-theme-environment';
-
 import { createThemeMediaQueryLists } from '../media/create-theme-media-query-lists';
-
 import type { MatchMedia } from '../media/match-media';
-
 import type { ThemeMediaQueryLists } from '../media/theme-media-query-lists';
-
 import { applyTheme } from './apply-theme';
-
 import type { ThemeController } from './theme-controller';
 
 interface CreateThemeControllerOptions {
   element: HTMLElement;
   matchMedia: MatchMedia;
   preference: ThemePreference;
+  storage?: ThemePreferenceStorage;
 }
 
 export function createThemeController(options: CreateThemeControllerOptions): ThemeController {
-  const mediaQueryLists = createThemeMediaQueryLists(options.matchMedia);
-
-  let preference = options.preference;
-
-  let theme = resolveTheme(preference, mediaQueryLists);
-
+  const mediaQueryLists: ThemeMediaQueryLists = createThemeMediaQueryLists(options.matchMedia);
+  let preference: ThemePreference = options.preference;
+  let theme: ResolvedTheme = resolveTheme(preference, mediaQueryLists);
   let disposed = false;
 
   function refresh(): void {
     theme = resolveTheme(preference, mediaQueryLists);
-
     applyTheme(options.element, theme);
   }
 
@@ -42,25 +40,31 @@ export function createThemeController(options: CreateThemeControllerOptions): Th
   refresh();
 
   return {
-    getPreference: () => preference,
+    getPreference: (): ThemePreference => preference,
 
-    getTheme: () => theme,
+    getTheme: (): ResolvedTheme => theme,
 
-    setPreference(nextPreference) {
+    setPreference(nextPreference: ThemePreference): void {
       preference = nextPreference;
-
       refresh();
+      options.storage?.set(nextPreference);
     },
 
     refresh,
 
-    dispose() {
+    dispose(): void {
       if (disposed) {
         return;
       }
 
       unsubscribe(mediaQueryLists, handleEnvironmentChange);
       disposed = true;
+    },
+
+    resetPreference(): void {
+      preference = DEFAULT_THEME_PREFERENCE;
+      options.storage?.remove();
+      refresh();
     },
   };
 }
@@ -69,7 +73,7 @@ function resolveTheme(
   preference: ThemePreference,
   mediaQueryLists: ThemeMediaQueryLists,
 ): ResolvedTheme {
-  const environment = getBrowserThemeEnvironment(mediaQueryLists);
+  const environment: ThemeEnvironment = getBrowserThemeEnvironment(mediaQueryLists);
 
   return resolveThemePreference(preference, environment);
 }

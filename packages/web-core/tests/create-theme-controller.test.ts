@@ -444,4 +444,172 @@ describe('createThemeController', (): void => {
     expect(media.contrast.removeEventListener).toHaveBeenCalledTimes(1);
     expect(media.motion.removeEventListener).toHaveBeenCalledTimes(1);
   });
+
+  it('debe persistir la preferencia al ejecutar setPreference', (): void => {
+    const media: ThemeMediaMock = createThemeMediaMock();
+    const storage = {
+      get: vi.fn((): null => null),
+      set: vi.fn(),
+      remove: vi.fn(),
+    };
+    const element: HTMLDivElement = document.createElement('div');
+    const controller: ThemeController = createThemeController({
+      element,
+      matchMedia: media.matchMedia,
+      preference: {
+        brand: 'delaluz',
+        scheme: 'system',
+        contrast: 'system',
+        motion: 'system',
+      },
+      storage,
+    });
+    const preference = {
+      brand: 'neutral',
+      scheme: 'dark',
+      contrast: 'high',
+      motion: 'reduced',
+    } as const;
+
+    controller.setPreference(preference);
+
+    expect(storage.set).toHaveBeenCalledOnce();
+    expect(storage.set).toHaveBeenCalledWith(preference);
+    expect(controller.getPreference()).toEqual(preference);
+    expect(controller.getTheme()).toEqual(preference);
+    expect(element.getAttribute('data-theme-brand')).toBe('neutral');
+    expect(element.getAttribute('data-theme-scheme')).toBe('dark');
+    expect(element.getAttribute('data-theme-contrast')).toBe('high');
+    expect(element.getAttribute('data-theme-motion')).toBe('reduced');
+  });
+
+  it('debe persistir system sin sustituirlo por los valores resueltos', (): void => {
+    const media = createThemeMediaMock({ scheme: true, contrast: true, motion: true });
+    const storage = { get: vi.fn(() => null), set: vi.fn(), remove: vi.fn() };
+    const preference = {
+      brand: 'neutral',
+      scheme: 'system',
+      contrast: 'system',
+      motion: 'system',
+    } as const;
+    const controller = createThemeController({
+      element: document.createElement('div'),
+      matchMedia: media.matchMedia,
+      preference: { brand: 'delaluz', scheme: 'light', contrast: 'standard', motion: 'standard' },
+      storage,
+    });
+
+    controller.setPreference(preference);
+
+    expect(storage.set).toHaveBeenCalledExactlyOnceWith(preference);
+    expect(controller.getPreference()).toEqual(preference);
+    expect(controller.getTheme()).toEqual({
+      brand: 'neutral',
+      scheme: 'dark',
+      contrast: 'high',
+      motion: 'reduced',
+    });
+  });
+
+  it('debe propagar errores de escritura después de aplicar el theme', (): void => {
+    const media = createThemeMediaMock();
+    const element = document.createElement('div');
+    const error = new Error('No se pudo guardar la preferencia');
+    const preference = {
+      brand: 'neutral',
+      scheme: 'dark',
+      contrast: 'high',
+      motion: 'reduced',
+    } as const;
+    const storage = {
+      get: vi.fn(() => null),
+      set: vi.fn(() => {
+        expect(element.getAttribute('data-theme-scheme')).toBe('dark');
+        throw error;
+      }),
+      remove: vi.fn(),
+    };
+    const controller = createThemeController({
+      element,
+      matchMedia: media.matchMedia,
+      preference: { brand: 'delaluz', scheme: 'light', contrast: 'standard', motion: 'standard' },
+      storage,
+    });
+
+    expect(() => controller.setPreference(preference)).toThrow(error);
+    expect(storage.set).toHaveBeenCalledExactlyOnceWith(preference);
+    expect(controller.getPreference()).toEqual(preference);
+    expect(controller.getTheme()).toEqual(preference);
+    expect(element.getAttribute('data-theme-brand')).toBe('neutral');
+    expect(element.getAttribute('data-theme-contrast')).toBe('high');
+    expect(element.getAttribute('data-theme-motion')).toBe('reduced');
+  });
+
+  it('no debe persistir al iniciar, refrescar o cambiar el entorno', (): void => {
+    const media = createThemeMediaMock();
+    const storage = { get: vi.fn(() => null), set: vi.fn(), remove: vi.fn() };
+    const controller = createThemeController({
+      element: document.createElement('div'),
+      matchMedia: media.matchMedia,
+      preference: { brand: 'delaluz', scheme: 'system', contrast: 'system', motion: 'system' },
+      storage,
+    });
+
+    expect(storage.set).not.toHaveBeenCalled();
+    expect(storage.get).not.toHaveBeenCalled();
+    controller.refresh();
+    media.scheme.change(true);
+    media.contrast.change(true);
+    media.motion.change(true);
+
+    expect(controller.getTheme()).toEqual({
+      brand: 'delaluz',
+      scheme: 'dark',
+      contrast: 'high',
+      motion: 'reduced',
+    });
+    expect(storage.set).not.toHaveBeenCalled();
+  });
+
+  it('debe restablecer la preferencia y eliminar la persistencia', (): void => {
+    const media: ThemeMediaMock = createThemeMediaMock({
+      scheme: true,
+      contrast: false,
+      motion: true,
+    });
+    const storage = {
+      get: vi.fn((): null => null),
+      set: vi.fn(),
+      remove: vi.fn(),
+    };
+    const element: HTMLDivElement = document.createElement('div');
+    const controller: ThemeController = createThemeController({
+      element,
+      matchMedia: media.matchMedia,
+      preference: {
+        brand: 'neutral',
+        scheme: 'light',
+        contrast: 'high',
+        motion: 'standard',
+      },
+      storage,
+    });
+
+    controller.resetPreference();
+
+    expect(controller.getPreference()).toEqual({
+      brand: 'delaluz',
+      scheme: 'system',
+      contrast: 'system',
+      motion: 'system',
+    });
+    expect(storage.remove).toHaveBeenCalledOnce();
+    expect(storage.set).not.toHaveBeenCalled();
+    expect(controller.getTheme()).toEqual({
+      brand: 'delaluz',
+      scheme: 'dark',
+      contrast: 'standard',
+      motion: 'reduced',
+    });
+  });
 });

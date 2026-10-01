@@ -8,3 +8,7 @@ export { createThemeController } from './theme/create-theme-controller';
 export type { ThemeController } from './theme/theme-controller';
 export { createThemeMediaQueryLists } from './media/create-theme-media-query-lists';
 export type { ThemeMediaQueryLists } from './media/theme-media-query-lists';
+export { createLocalStorageThemePreferenceStorage } from './storage/create-local-storage-theme-preference-storage';
+export { THEME_PREFERENCE_STORAGE_VERSION } from './storage/persisted-theme-preference';
+export type { PersistedThemePreference } from './storage/persisted-theme-preference';
+export { THEME_PREFERENCE_STORAGE_KEY } from './storage/theme-storage-key';

@@ -7,6 +7,8 @@ export interface ThemeController {
 
   setPreference(preference: ThemePreference): void;
 
+  resetPreference(): void;
+
   refresh(): void;
 
   dispose(): void;

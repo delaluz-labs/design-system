@@ -8,3 +8,5 @@ export type { ThemeEnvironment } from './types/theme-environment';
 export type { ThemeMotion, ThemeMotionPreference } from './types/theme-motion';
 export type { ThemePreference } from './types/theme-preference';
 export type { ThemeScheme, ThemeSchemePreference } from './types/theme-scheme';
+export type { ThemePreferenceStorage } from './storage/theme-preference-storage';
+export { isThemePreference } from './validation/is-theme-preference';
