@@ -2,6 +2,7 @@ import { beforeEach, afterEach, describe, expect, it, vi } from 'vitest';
 import { buildBase } from '../../scripts/build/build-base.mjs';
 import { buildThemes } from '../../scripts/build/build-themes.mjs';
 import { buildThemeManifest } from '../../scripts/build/build-manifest.mjs';
+import { TOKEN_CONFIG } from '../../config/token-config.mjs';
 
 const mocks = vi.hoisted(() => ({
   dictionary: vi.fn(),
@@ -69,6 +70,8 @@ describe('build', () => {
       'src/primitive/typography.tokens.json',
     ]);
     expect(config.platforms.css.buildPath).toBe('dist/css/');
+    expect(config.platforms.css.prefix).toBe(TOKEN_CONFIG.cssVariablePrefix);
+    expect(config.platforms.css.files[0].options.outputReferences).toBe(false);
     expect(config.platforms.json.buildPath).toBe('dist/json/');
     expect(mocks.buildAllPlatforms).toHaveBeenCalledOnce();
   });
@@ -88,7 +91,16 @@ describe('build', () => {
       expect(config.tokens).toEqual({ scheme: { $value: scheme } });
       expect(Object.keys(config.platforms)).toEqual(['css', 'json', 'javascript']);
       expect(config.platforms.css.buildPath).toBe(`dist/themes/${id}/`);
-      expect(config.platforms.css.files[0].options.selector).toBe(`[data-theme-id="${id}"]`);
+      expect(config.platforms.css.prefix).toBe(TOKEN_CONFIG.cssVariablePrefix);
+      expect(config.platforms.json.prefix).toBeUndefined();
+      expect(config.platforms.javascript.prefix).toBeUndefined();
+      expect(config.platforms.css.files[0].options.selector).toBe(
+        `:root[data-theme-brand="${themes[index].brand}"]` +
+          `[data-theme-scheme="${scheme}"]` +
+          `[data-theme-contrast="${themes[index].contrast}"]` +
+          `[data-theme-motion="${themes[index].motion}"]`,
+      );
+      expect(config.platforms.css.files[0].options.outputReferences).toBe(false);
     }
   });
 

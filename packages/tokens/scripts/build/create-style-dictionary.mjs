@@ -1,11 +1,27 @@
 import StyleDictionary from 'style-dictionary';
 import { formats, transformGroups } from 'style-dictionary/enums';
+import { durationCss } from './duration-css.mjs';
+import { TOKEN_CONFIG } from '../../config/token-config.mjs';
+import { createThemeSelector } from '../theme/create-theme-selector.mjs';
 
-export function createStyleDictionary({ id, tokens }) {
+function createCssOptions(theme) {
+  return {
+    showFileHeader: false,
+    outputReferences: false,
+    ...(theme ? { selector: createThemeSelector(theme) } : {}),
+  };
+}
+
+export function createStyleDictionary({ id, tokens, theme }) {
   const buildPath = `dist/themes/${id}/`;
 
   return new StyleDictionary({
     tokens,
+    hooks: {
+      transforms: {
+        'duration/css': durationCss,
+      },
+    },
 
     log: {
       warnings: 'error',
@@ -15,16 +31,14 @@ export function createStyleDictionary({ id, tokens }) {
     platforms: {
       css: {
         transformGroup: transformGroups.css,
+        transforms: ['duration/css'],
         buildPath,
+        prefix: TOKEN_CONFIG.cssVariablePrefix,
         files: [
           {
             destination: 'tokens.css',
             format: formats.cssVariables,
-            options: {
-              showFileHeader: false,
-              selector: `[data-theme-id="${id}"]`,
-              outputReferences: false,
-            },
+            options: createCssOptions(theme),
           },
         ],
       },

@@ -1,0 +1,13 @@
+html {
+  color-scheme: light dark;
+}
+
+body {
+  min-block-size: 100vh;
+
+  background: var(--delaluz-color-background-page);
+  color: var(--delaluz-color-text-primary);
+
+  font-family: var(--delaluz-font-family-body);
+  font-size: var(--delaluz-font-size-body);
+}

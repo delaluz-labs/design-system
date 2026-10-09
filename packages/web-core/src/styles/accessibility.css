@@ -1,0 +1,5 @@
+:root[data-theme-motion='reduced'] *,
+:root[data-theme-motion='reduced'] *::before,
+:root[data-theme-motion='reduced'] *::after {
+  scroll-behavior: auto !important;
+}

@@ -1,4 +1,6 @@
 import StyleDictionary from 'style-dictionary';
+import { formats, transformGroups } from 'style-dictionary/enums';
+import { TOKEN_CONFIG } from '../../config/token-config.mjs';
 
 export async function buildBase() {
   const dictionary = new StyleDictionary({
@@ -13,29 +15,33 @@ export async function buildBase() {
       verbosity: 'default',
     },
 
-    options: {
-      showFileHeader: false,
-    },
-
     platforms: {
       css: {
-        transformGroup: 'css',
+        transformGroup: transformGroups.css,
+        prefix: TOKEN_CONFIG.cssVariablePrefix,
         buildPath: 'dist/css/',
         files: [
           {
             destination: 'base.css',
-            format: 'css/variables',
+            format: formats.cssVariables,
+            options: {
+              showFileHeader: false,
+              outputReferences: false,
+            },
           },
         ],
       },
 
       json: {
-        transformGroup: 'js',
+        transformGroup: transformGroups.js,
         buildPath: 'dist/json/',
         files: [
           {
             destination: 'base.json',
-            format: 'json/nested',
+            format: formats.jsonNested,
+            options: {
+              showFileHeader: false,
+            },
           },
         ],
       },
