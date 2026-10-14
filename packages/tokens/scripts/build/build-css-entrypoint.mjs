@@ -14,9 +14,7 @@ export async function buildCssEntrypoint() {
   const permutations = createThemePermutations();
   const imports = [
     './base.css',
-    ...permutations.map(
-      (theme) => `../themes/${createThemeId(theme)}/tokens.css`,
-    ),
+    ...permutations.map((theme) => `../themes/${createThemeId(theme)}/tokens.css`),
     './foundations.css',
   ];
 
@@ -24,8 +22,7 @@ export async function buildCssEntrypoint() {
     await assertCssFileExists(path);
   }
 
-  const content = imports.map((path) => `@import '${path}';`)
-    .join('\n');
+  const content = imports.map((path) => `@import '${path}';`).join('\n');
 
   await mkdir(OUTPUT_DIRECTORY, { recursive: true });
   await writeFile(OUTPUT_FILE, `${content}\n`, 'utf8');

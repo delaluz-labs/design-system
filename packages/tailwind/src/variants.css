@@ -1,0 +1,27 @@
+@custom-variant theme-dark (
+  &:where(
+    [data-theme-scheme='dark'],
+    [data-theme-scheme='dark'] *
+  )
+);
+
+@custom-variant theme-light (
+  &:where(
+    [data-theme-scheme='light'],
+    [data-theme-scheme='light'] *
+  )
+);
+
+@custom-variant theme-high-contrast (
+  &:where(
+    [data-theme-contrast='high'],
+    [data-theme-contrast='high'] *
+  )
+);
+
+@custom-variant theme-reduced-motion (
+  &:where(
+    [data-theme-motion='reduced'],
+    [data-theme-motion='reduced'] *
+  )
+);

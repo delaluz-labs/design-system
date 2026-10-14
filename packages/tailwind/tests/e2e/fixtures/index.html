@@ -1,0 +1,37 @@
+<!doctype html>
+<html
+  lang="es"
+  data-theme-scheme="light"
+  data-theme-contrast="standard"
+  data-theme-motion="standard"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pruebas E2E | De la Luz Labs</title>
+
+    <link rel="stylesheet" href="../../integration/generated/output.css" />
+  </head>
+
+  <body>
+    <main>
+      <h1>Validación del adaptador Tailwind</h1>
+
+      <section
+        id="panel"
+        class="bg-surface text-content border border-outline theme-high-contrast:border-4 theme-dark:font-bold"
+      >
+        <h2>Panel temático</h2>
+        <p>Este panel cambia de apariencia mediante variables CSS.</p>
+      </section>
+
+      <button
+        id="animated-button"
+        class="transition-all duration-300 theme-reduced-motion:transition-none"
+        type="button"
+      >
+        Botón de prueba
+      </button>
+    </main>
+  </body>
+</html>

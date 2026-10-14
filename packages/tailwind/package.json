@@ -1,0 +1,57 @@
+{
+  "name": "@delaluz/tailwind",
+  "version": "0.0.0",
+  "description": "Tailwind CSS 4 adapter for De la Luz Labs Design System.",
+  "author": "Eduardo de la Luz Nicolás",
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": "./dist/theme.css",
+    "./theme.css": "./dist/theme.css",
+    "./variants.css": "./dist/variants.css",
+    "./token-catalog.json": "./dist/token-catalog.json"
+  },
+  "scripts": {
+    "clean": "node -e \"import('node:fs').then(({rmSync}) => rmSync('dist', {recursive:true,force:true}))\"",
+    "tokens:catalog": "node scripts/generate-token-catalog.mjs",
+    "build": "npm run clean && npm run tokens:catalog && node scripts/build.mjs",
+    "test": "vitest run --config vitest.config.js",
+    "test:coverage": "vitest run --config vitest.config.js --coverage",
+    "test:integration:fixture": "node scripts/integration/build-fixture.mjs",
+    "test:integration:compile": "tailwindcss -i tests/integration/input.css -o tests/integration/generated/output.css",
+    "test:integration": "npm run test:integration:fixture && npm run test:integration:compile && vitest run --config vitest.integration.config.js",
+    "test:e2e": "npm run test:integration:fixture && npm run test:integration:compile && playwright test --config playwright.config.js",
+    "test:determinism": "node scripts/verify-build-determinism.mjs",
+    "test:package": "node scripts/verify-package.mjs",
+    "validate:release": "npm run test && npm run test:integration && npm run test:e2e && npm run test:determinism && npm run test:package"
+  },
+  "peerDependencies": {
+    "tailwindcss": "4.3.3"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.64.0",
+    "@tailwindcss/cli": "4.3.3",
+    "tailwindcss": "4.3.3",
+    "vite": "8.3.4",
+    "vitest": "5.0.0"
+  },
+  "engines": {
+    "node": ">=24 <25",
+    "npm": ">=11"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/delaluz-labs/design-system.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/delaluz-labs/design-system/issues"
+  },
+  "homepage": "https://github.com/delaluz-labs/design-system#readme"
+}

@@ -1,0 +1,25 @@
+@import 'tailwindcss';
+@import './generated/theme.css';
+@import '../../src/variants.css';
+
+:root {
+  --delaluz-test-surface: #ffffff;
+  --delaluz-test-content: #111827;
+  --delaluz-test-outline: #d1d5db;
+}
+
+:root[data-theme-scheme='dark'] {
+  --delaluz-test-surface: #111827;
+  --delaluz-test-content: #f9fafb;
+  --delaluz-test-outline: #6b7280;
+}
+
+:root[data-theme-contrast='high'] {
+  --delaluz-test-outline: #000000;
+}
+
+:root[data-theme-scheme='dark'][data-theme-contrast='high'] {
+  --delaluz-test-outline: #ffffff;
+}
+
+@source inline("bg-surface text-content border-outline border theme-reduced-motion:transition-none theme-high-contrast:border-4 theme-dark:font-bold");

@@ -12,7 +12,10 @@ async function validateCssThemes() {
   for (const theme of permutations) {
     const id = createThemeId(theme);
     const relativePath = `../themes/${id}/tokens.css`;
-    const css = await readFile(new URL(`../dist/themes/${id}/tokens.css`, import.meta.url), 'utf-8');
+    const css = await readFile(
+      new URL(`../dist/themes/${id}/tokens.css`, import.meta.url),
+      'utf-8',
+    );
 
     if (!css.includes(createThemeSelector(theme))) {
       errors.push(`Selector incorrecto: ${id}`);
@@ -37,7 +40,10 @@ async function validateCssThemes() {
 async function validateCssFoundations() {
   const prefix = `--${TOKEN_CONFIG.cssVariablePrefix}-`;
   const base = await readFile(new URL('../dist/css/base.css', import.meta.url), 'utf-8');
-  const foundations = await readFile(new URL('../dist/css/foundations.css', import.meta.url), 'utf-8');
+  const foundations = await readFile(
+    new URL('../dist/css/foundations.css', import.meta.url),
+    'utf-8',
+  );
   const entrypoint = await readFile(new URL('../dist/css/index.css', import.meta.url), 'utf-8');
 
   if (!base.includes(prefix)) {
