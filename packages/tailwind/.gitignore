@@ -1,0 +1,6 @@
+dist/
+coverage/
+node_modules/
+tests/integration/generated/
+playwright-report/
+test-results/

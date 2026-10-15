@@ -10,7 +10,7 @@ export async function buildThemes() {
     const id = createThemeId(theme);
     const { tokens } = await resolveThemeTokens(theme);
 
-    await buildTheme({ id, tokens });
+    await buildTheme({ id, theme, tokens });
 
     console.log(`Theme generado: ${id}`);
   }

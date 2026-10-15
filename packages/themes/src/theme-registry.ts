@@ -1,4 +1,4 @@
-import type { ThemeBrand } from './theme.types.js';
+import type { ThemeBrand } from './types/theme-brand';
 
 export interface BrandDefinition {
   readonly id: ThemeBrand;

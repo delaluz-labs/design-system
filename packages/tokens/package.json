@@ -5,7 +5,9 @@
   "author": "Eduardo de la Luz Nicolás",
   "type": "module",
   "license": "MIT",
-  "sideEffects": false,
+  "sideEffects": [
+    "**/*.css"
+  ],
   "files": [
     "dist"
   ],
@@ -14,7 +16,7 @@
       "types": "./dist/types/index.d.ts",
       "import": "./dist/types/index.js"
     },
-    "./css": "./dist/css/tokens.css",
+    "./css": "./dist/css/index.css",
     "./json": "./dist/json/tokens.json"
   },
   "publishConfig": {
@@ -25,12 +27,14 @@
     "tokens:validate": "node ./scripts/validate.mjs",
     "themes:validate": "node ./scripts/validate-themes.mjs",
     "build:tokens": "node ./scripts/build.mjs",
-    "build": "npm run clean && npm run tokens:validate && npm run themes:validate && npm run build:tokens",
+    "build": "npm run clean && npm run tokens:validate && npm run themes:validate && npm run build:tokens && npm run validate:css",
     "build:determinism": "node ./scripts/build/validate-determinism.mjs",
+    "build:css-entrypoint": "node scripts/build/run-css-entrypoint.mjs",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "validate:css": "node scripts/validate-css-themes.mjs"
   },
   "keywords": [],
   "devDependencies": {

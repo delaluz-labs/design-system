@@ -38,3 +38,6 @@ jobs:
 
       - name: Tokens coverage
         run: npm run test:coverage --workspace=@delaluz/tokens
+
+      - name: Themes coverage
+        run: npm run test:coverage --workspace=@delaluz/themes
