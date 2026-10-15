@@ -22,7 +22,7 @@ export default [
     },
     rules: {
       complexity: ['error', 10],
-      'no-console': ['warn', { allow: ['log', 'warn', 'error'] }],
+      'no-console': ['warn', { allow: ['log', 'warn', 'error', 'table'] }],
     },
   },
 ];

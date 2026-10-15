@@ -100,4 +100,81 @@ describe('validateThemeCoverage', () => {
       validateThemeCoverage(mappings, { base: sources.base, themes: [] }, 'delaluz'),
     ).toThrow(/no se encontraron temas/);
   });
+
+  it('detecta tokens faltantes en múltiples temas', () => {
+    const sources = {
+      base: '',
+      themes: [
+        { id: 'light', css: ':root {}' },
+        { id: 'dark', css: ':root {}' },
+      ],
+    };
+
+    const mappings = {
+      '--color-surface': {
+        source: 'theme',
+        token: 'color-surface',
+      },
+    };
+
+    expect(() => validateThemeCoverage(mappings, sources, 'delaluz')).toThrow(
+      /falta --delaluz-color-surface en light/,
+    );
+
+    expect(() => validateThemeCoverage(mappings, sources, 'delaluz')).toThrow(
+      /falta --delaluz-color-surface en dark/,
+    );
+  });
+
+  it('rechaza un mapeo nulo', () => {
+    const mappings = {
+      '--color-surface': null,
+    };
+
+    expect(() => validateThemeCoverage(mappings, { base: '', themes: [] }, 'delaluz')).toThrow(
+      /Configuración inválida/,
+    );
+  });
+
+  it('rechaza nombres de tokens inválidos', () => {
+    const mappings = {
+      '--color-surface': {
+        source: 'theme',
+        token: 'Color Surface',
+      },
+    };
+
+    expect(() => validateThemeCoverage(mappings, { base: '', themes: [] }, 'delaluz')).toThrow(
+      /Configuración inválida/,
+    );
+  });
+
+  it('acepta múltiples mapeos válidos', () => {
+    const sources = {
+      base: ':root { --delaluz-radius-md: 8px; }',
+      themes: [
+        {
+          id: 'light',
+          css: ':root { --delaluz-color-surface: white; }',
+        },
+        {
+          id: 'dark',
+          css: ':root { --delaluz-color-surface: black; }',
+        },
+      ],
+    };
+
+    const mappings = {
+      '--radius-md': {
+        source: 'base',
+        token: 'radius-md',
+      },
+      '--color-surface': {
+        source: 'theme',
+        token: 'color-surface',
+      },
+    };
+
+    expect(() => validateThemeCoverage(mappings, sources, 'delaluz')).not.toThrow();
+  });
 });
